@@ -43,7 +43,14 @@ var app5 = new Vue({
 			this.message = this.message.split('').reverse().join('')
 		}
 	}
-})
+});
+
+var app6 = new Vue({
+	el: '#app6',
+	data: {
+		message: 'Привет, Vue!'
+	}
+});
 
 setTimeout(() => {
 	app.message = 'новое сообщение';
