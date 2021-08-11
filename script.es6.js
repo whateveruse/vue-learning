@@ -5,6 +5,7 @@ Vue.component('app-nav', {
 	template: '<h1>{{ message }}</h1>',
 	data: () => {
 		return {
+			classList: null,
 			message: 'Привет, Vue!'
 		};
 	},
@@ -49,6 +50,7 @@ Vue.component('app-content', {
 					v-for="item in todos"
 					:todo="item"
 					:key="item.id"
+					class="selected removed"
 				></todo-item>
 			</ol>
 
@@ -122,7 +124,15 @@ Vue.component('todo-item', {
 var app = new Vue({
 	el: '#app',
 	data: {
-	}
+	},
+	computed: {
+		classList: function () {
+			return {
+				selected: true,
+				removed: true
+			};
+		},
+	},
 });
 
 var app5 = new Vue({
