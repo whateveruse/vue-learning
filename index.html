@@ -49,6 +49,10 @@
 	<form action="https://google.com/" class="big" :class="classList" v-show="showForm">
 		<button type="submit" @click.prevent="onClick1">Перевернуть сообщение</button>
 	</form>
+
+	<template v-for="n in 10">
+		<b>Повторяющееся</b> <i>сообщение</i> <u>{{ n }}</u><br>
+	</template>
 </div>
 
 <hr>
@@ -74,6 +78,14 @@
 	<template v-else>
 	  <label>Email</label>
 	  <input placeholder="Введите адрес email" key="email-input">
+	  <p>Подсказка1:</p>
+	  <ul>
+	  	<li v-for="n in evenNumbers">{{ n }}</li>
+	  </ul>
+	  <p>Подсказка2:</p>
+	  <ul v-for="set in sets">
+	    <li v-for="n in even(set)">{{ n }}</li>
+	  </ul>
 	</template>
 </div>
 

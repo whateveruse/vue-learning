@@ -76,7 +76,7 @@ Vue.component('todo-item', {
 Vue.component('app-content', {
 	template: `
 		<div>
-			<ol>
+			<ol @click="processTodos">
 				<todo-item
 					v-for="(item, index) in todos"
 					:todo="item"
@@ -105,7 +105,12 @@ Vue.component('app-content', {
 	    setTimeout(() => {
 	    	this.todos.push({id: 3, text: 'Profit.'});
 	    }, 1500);
-	}
+	},
+	methods: {
+		processTodos: function () {
+			this.todos.sort((v) => Math.random() > 0.5);
+		}
+	},
 });
 
 Vue.component('app-view', {
@@ -226,6 +231,12 @@ var app6 = new Vue({
 		fontSize: 18,
 		fontWeight: 'normal',
 		loginType: 'username',
+
+		sets: [
+			[ 1, 2, 3, 4, 5 ],
+			[6, 7, 8, 9, 10]
+		],
+		numbers: [ 1, 2, 3, 4, 5 ],
 	},
 	watch: {
 	    // эта функция запускается при любом изменении вопроса
@@ -250,7 +261,10 @@ var app6 = new Vue({
 				'color': 'orange',
 				'text-decoration': 'underline',
 			};
-		}
+		},
+		evenNumbers: function () {
+			return this.numbers.filter((n) => n % 2 === 0);
+		},
 	},
 	methods: {
 		onClick: function () {
@@ -259,7 +273,10 @@ var app6 = new Vue({
 			this.fontSize = 24;
 			this.fontWeight = 'bold';
 			this.loginType = this.loginType == 'username'? '' : 'username';
-		}
+		},
+		even: function (numbers) {
+			return numbers.filter((n) => n % 2 === 0);
+		},
 	}
 });
 
