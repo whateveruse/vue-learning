@@ -152,6 +152,12 @@ var app6 = new Vue({
 		firstName: '',
 		lastName: '',
 	},
+	watch: {
+	    // эта функция запускается при любом изменении вопроса
+	    message: function (newValue, oldValue) {
+			console.log('ajax search: ', newValue, oldValue);
+	    }
+	},
 	computed: {
 		fullName: {
 			get: function () {
