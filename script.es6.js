@@ -179,6 +179,9 @@ var app6 = new Vue({
 		isInputDisabled: false,
 		firstName: '',
 		lastName: '',
+		activeColor: 'green',
+		fontSize: 18,
+		fontWeight: 'normal',
 	},
 	watch: {
 	    // эта функция запускается при любом изменении вопроса
@@ -196,11 +199,21 @@ var app6 = new Vue({
 				this.firstName = names[0];
 				this.lastName = names[names.length - 1];
 			}
+		},
+		styleList: function () {
+			return {
+				'font-size': '12px',
+				'color': 'orange',
+				'text-decoration': 'underline',
+			};
 		}
 	},
 	methods: {
 		onClick: function () {
 			this.fullName = this.message;
+			this.activeColor = 'brown';
+			this.fontSize = 24;
+			this.fontWeight = 'bold';
 		}
 	}
 });

@@ -55,9 +55,9 @@
 
 <div id="app6">
   <p>{{ message }}</p>
-  [ <span v-html="message"></span> ]
+  [ <span v-html="message" :style="{ color: activeColor, fontSize: fontSize + 'px', 'font-weight': fontWeight }"></span> ]
   <input v-model="message" @click="onClick">
-  <textarea :disabled="isInputDisabled" >{{ message }}</textarea>
+  <textarea :disabled="isInputDisabled" :style="styleList">{{ message }}</textarea>
   <a :href="message" target="_blank">{{ message }}</a>
 
   <input type="text" :value="firstName"> - <input type="text" :value="lastName">
