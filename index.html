@@ -38,7 +38,7 @@
 <div id="app5">
   <p>{{ message }}</p>
   <p>Reversed: {{ reversedMessage }}</p>
-	<form action="https://google.com/" class="big" :class="{active: isActive, 'text-danger': hasError() }">
+	<form action="https://google.com/" class="big" :class="classList">
 		<button type="submit" @click.prevent="onClick1">Перевернуть сообщение</button>
 	</form>
 </div>

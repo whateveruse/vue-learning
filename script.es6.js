@@ -136,7 +136,13 @@ var app5 = new Vue({
 		reversedMessage: function () {
 			// `this` указывает на экземпляр vm
 			return this.message.split('').reverse().join('');
-		}
+		},
+		classList: function () {
+			return {
+				active: this.isActive,
+				'text-danger': this.hasError()
+			}
+		},
 	},
 	methods: {
 		reverseMessage: function () {
