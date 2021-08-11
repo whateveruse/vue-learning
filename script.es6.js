@@ -42,15 +42,48 @@ Vue.component('app-sidebar', {
 	}
 });
 
+Vue.component('todo-item', {
+	// Компонент  принимает входной параметр.
+	props: [
+	  	'todo',
+	  	'prefix',
+	  	'idx',
+	],
+	template: `
+		<li :id="'js-todo-item-' + todo.id">
+			{{ prefix }} [{{ idx }}]
+			<ul id="v-for-object" class="demo">
+				<li v-for="(value, name, index) in todo">
+			    	<i>{{ index + 1}}.</i> {{ getTitle(name) }}: {{ value }}
+				</li>
+			</ul>
+		</li>
+	`,
+	methods: {
+		getTitle: function (code) {
+			switch (code) {
+				case 'id':
+					return 'Идентификатор';
+				case 'text':
+					return 'Название';
+				default:
+					return '';
+			}
+		}
+	}
+});
+
 Vue.component('app-content', {
 	template: `
 		<div>
 			<ol>
 				<todo-item
-					v-for="item in todos"
+					v-for="(item, index) in todos"
 					:todo="item"
 					:key="item.id"
 					class="selected removed"
+					:prefix="prefix"
+					:idx="index"
 				></todo-item>
 			</ol>
 
@@ -60,6 +93,7 @@ Vue.component('app-content', {
 	`,
 	data: () => {
 		return {
+			prefix: ' ----> ',
 			todos: [
 				{ id: 0, text: 'Изучить JavaScript' },
 				{ id: 1, text: 'Изучить Vue' },
@@ -122,18 +156,6 @@ Vue.component('app-view', {
 			this.message = this.reversedMessage;
 		}
 	}
-});
-
-Vue.component('todo-item', {
-  // Компонент todo-item теперь принимает
-  // "prop", то есть входной параметр.
-  // Имя входного параметра todo.
-  props: ['todo'],
-  template: `
-  	<li :id="'js-todo-item-' + todo.id">
-  		{{ todo.text }}
-  	</li>
-  `
 });
 
 var app = new Vue({
