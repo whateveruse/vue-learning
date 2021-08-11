@@ -22,13 +22,21 @@ var app3 = new Vue({
 	}
 });
 
+Vue.component('todo-item', {
+  // Компонент todo-item теперь принимает
+  // "prop", то есть входной параметр.
+  // Имя входного параметра todo.
+  props: ['todo'],
+  template: '<li>{{ todo.text }}</li>'
+});
+
 var app4 = new Vue({
 	el: '#app4',
 	data: {
 		todos: [
-			{ text: 'Изучить JavaScript' },
-			{ text: 'Изучить Vue' },
-			{ text: 'Создать еще один JS фреймворк' }
+			{ id: 0, text: 'Изучить JavaScript' },
+			{ id: 1, text: 'Изучить Vue' },
+			{ id: 2, text: 'Создать еще один JS фреймворк' }
 		]
 	}
 });
@@ -54,6 +62,7 @@ var app6 = new Vue({
 
 setTimeout(() => {
 	app.message = 'новое сообщение';
+	app6.message = '12345';
 }, 1000);
 
 setTimeout(() => {
@@ -65,5 +74,8 @@ setTimeout(() => {
 }, 3000);
 
 setTimeout(() => {
-	app4.todos.push({text: 'Profit'});
+	app4.todos.push({
+		id: 4,
+		text: 'Profit'
+	});
 }, 1500);

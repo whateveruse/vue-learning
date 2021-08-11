@@ -28,9 +28,11 @@
 
 <div id="app4">
   <ol>
-    <li v-for="todo in todos">
-      {{ todo.text }}
-    </li>
+    <todo-item
+      v-for="item in todos"
+      v-bind:todo="item"
+      v-bind:key="item.id"
+    ></todo-item>
   </ol>
 </div>
 
