@@ -116,5 +116,5 @@ var app6 = new Vue({
 });
 
 setTimeout(() => {
-	app6.message = '12345';
+	app6.message = '<i><b>12345</b></i>';
 }, 1000);
