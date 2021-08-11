@@ -29,9 +29,11 @@
 <div id="app6">
   <p>{{ message }}</p>
   [ <span v-html="message"></span> ]
-  <input v-model="message">
+  <input v-model="message" @click="onClick">
   <textarea :disabled="isInputDisabled" >{{ message }}</textarea>
   <a :href="message" target="_blank">{{ message }}</a>
+
+  <input type="text" :value="firstName"> - <input type="text" :value="lastName">
 </div>
 
 <script type="module" src="script.es6.js"></script>

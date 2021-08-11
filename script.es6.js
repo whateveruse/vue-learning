@@ -149,6 +149,25 @@ var app6 = new Vue({
 	data: {
 		message: 'Привет, Vue!',
 		isInputDisabled: false,
+		firstName: '',
+		lastName: '',
+	},
+	computed: {
+		fullName: {
+			get: function () {
+				return this.firstName + ' ' + this.lastName;
+			},
+			set: function (newValue) {
+				var names = newValue.split(' ');
+				this.firstName = names[0];
+				this.lastName = names[names.length - 1];
+			}
+		}
+	},
+	methods: {
+		onClick: function () {
+			this.fullName = this.message;
+		}
 	}
 });
 
