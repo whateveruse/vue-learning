@@ -60,7 +60,10 @@
   <textarea :disabled="isInputDisabled" :style="styleList">{{ message }}</textarea>
   <a :href="message" target="_blank">{{ message }}</a>
 
-  <input type="text" :value="firstName"> - <input type="text" :value="lastName">
+  <div :style="{ display: ['-webkit-box', '-ms-flexbox', 'flex'] }">
+  		<input type="text" :value="firstName">
+  		<input type="text" :value="lastName">
+	</div>
 </div>
 
 <script type="module" src="script.es6.js"></script>
