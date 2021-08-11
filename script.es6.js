@@ -31,6 +31,18 @@ var app4 = new Vue({
 			{ text: 'Создать еще один JS фреймворк' }
 		]
 	}
+});
+
+var app5 = new Vue({
+	el: '#app5',
+	data: {
+		message: 'Привет, Vue.js!'
+	},
+	methods: {
+		reverseMessage: function () {
+			this.message = this.message.split('').reverse().join('')
+		}
+	}
 })
 
 setTimeout(() => {
