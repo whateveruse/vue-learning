@@ -74,17 +74,27 @@ Vue.component('app-content', {
 
 Vue.component('app-view', {
 	//TODO!!! вложенные компоненты
-	template: '<span v-if="seen">Сейчас меня видно</span>',
+	template: '<span v-if="seen" v-bind:[someAttr]="message" v-on:[eventName]="onClick">{{ message }}</span>',
 	data: () => {
 		return {
-			seen: true
+			seen: false,
+			someAttr: null,
+			eventName: 'click',
+			message: 'Сейчас меня видно',
 		};
 	},
 	created: function () {
 	    setTimeout(() => {
-	    	this.seen = false;
+	    	this.seen = true;
 	    }, 2500);
 	},
+	methods: {
+		onClick: function () {
+			this.message = this.message.split('').reverse().join('');
+			this.eventName = null;
+			this.someAttr = 'title';
+		}
+	}
 });
 
 Vue.component('todo-item', {
