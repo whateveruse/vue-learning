@@ -7,7 +7,19 @@ Vue.component('app-nav', {
 		return {
 			message: 'Привет, Vue!'
 		};
-	}
+	},
+	//!!! Не используйте стрелочные функции в свойствах экземпляра и в коллбэках, например created: () => console.log(this.a) или vm.$watch('a', newVal => this.myMethod())
+	created: function () {
+	    setTimeout(() => {
+	    	this.message = 'Видоизменённый заголовок...';
+	    }, 1000);
+	}/*,
+	mounted: function () {
+	},
+	updated: function () {
+	},
+	destroyed: function () {
+	}*/
 });
 
 Vue.component('app-sidebar', {
@@ -21,6 +33,11 @@ Vue.component('app-sidebar', {
 		return {
 			message: 'Вы загрузили эту страницу: ' + new Date().toLocaleString()
 		};
+	},
+	created: function () {
+	    setTimeout(() => {
+	    	this.message = 'Видоизменённый title: ' + Math.ceil(Math.random() * 10 + 90);
+	    }, 2000);
 	}
 });
 
@@ -42,6 +59,11 @@ Vue.component('app-content', {
 				{ id: 2, text: 'Создать еще один JS фреймворк' }
 			]
 		};
+	},
+	created: function () {
+	    setTimeout(() => {
+	    	this.todos.push({id: 3, text: 'Profit.'});
+	    }, 1500);
 	}
 });
 
@@ -52,7 +74,12 @@ Vue.component('app-view', {
 		return {
 			seen: true
 		};
-	}
+	},
+	created: function () {
+	    setTimeout(() => {
+	    	this.seen = false;
+	    }, 2500);
+	},
 });
 
 Vue.component('todo-item', {
