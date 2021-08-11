@@ -14,3 +14,11 @@ var app2 = new Vue({
 		message: 'Вы загрузили эту страницу: ' + new Date().toLocaleString()
 	}
 });
+
+setTimeout(() => {
+	app.message = 'новое сообщение';
+}, 1000);
+
+setTimeout(() => {
+	app2.message = 'новое значение [' + Math.ceil(50 + Math.random() * 90) + ']';
+}, 500);
