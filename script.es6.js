@@ -92,7 +92,11 @@ Vue.component('todo-item', {
   // "prop", то есть входной параметр.
   // Имя входного параметра todo.
   props: ['todo'],
-  template: '<li>{{ todo.text }}</li>'
+  template: `
+  	<li v-bind:id="'js-todo-item-' + todo.id">
+  		{{ todo.text }}
+  	</li>
+  `
 });
 
 var app = new Vue({
