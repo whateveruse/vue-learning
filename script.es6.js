@@ -111,10 +111,12 @@ var app5 = new Vue({
 var app6 = new Vue({
 	el: '#app6',
 	data: {
-		message: 'Привет, Vue!'
+		message: 'Привет, Vue!',
+		isInputDisabled: false,
 	}
 });
 
 setTimeout(() => {
 	app6.message = '<i><b>12345</b></i>';
+	app6.isInputDisabled = true;
 }, 1000);

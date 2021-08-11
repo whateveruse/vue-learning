@@ -27,7 +27,7 @@
   <p>{{ message }}</p>
   [ <span v-html="message"></span> ]
   <input v-model="message">
-  <textarea>{{ message }}</textarea>
+  <textarea v-bind:disabled="isInputDisabled" >{{ message }}</textarea>
   <a v-bind:href="message" target="_blank">{{ message }}</a>
 </div>
 
