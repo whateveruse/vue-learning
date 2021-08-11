@@ -107,7 +107,8 @@ Vue.component('app-content', {
 	    }, 1500);
 	},
 	methods: {
-		processTodos: function () {
+		processTodos: function (event) {
+			console.log(event);
 			this.todos.sort((v) => Math.random() > 0.5);
 		}
 	},
@@ -152,10 +153,11 @@ Vue.component('app-view', {
 		}
 	},
 	methods: {
-		onClick: function () {
+		onClick: function (event) {
 			this.reverseMessage();
 			this.eventName = null;
 			this.someAttr = 'title';
+			console.log(event);
 		},
 		reverseMessage: function () {
 			this.message = this.reversedMessage;
@@ -185,6 +187,7 @@ var app5 = new Vue({
 		classSelected: 'selected',
 		classRemoved: 'removed',
 		showForm: false,
+		checked: false,
 	},
 	created: function () {
 	    setTimeout(() => {
@@ -213,10 +216,21 @@ var app5 = new Vue({
 			console.log(res);
 			return res > 25;
 		},
-		onClick1: function () {
+		onClick1: function (event) {
+			console.log(event);
 			this.reverseMessage();
 			this.isActive = !this.isActive;
 		},
+		alert: function (msg) {
+			alert(msg);
+		},
+		warn: function (message, event) {
+		    if (event) {
+		    	event.preventDefault();
+		    	message += ' ' + event.target.textContent;
+		    }
+		    alert(message);
+		}
 	}
 });
 
@@ -267,12 +281,13 @@ var app6 = new Vue({
 		},
 	},
 	methods: {
-		onClick: function () {
+		onClick: function (event) {
 			this.fullName = this.message;
 			this.activeColor = 'brown';
 			this.fontSize = 24;
 			this.fontWeight = 'bold';
 			this.loginType = this.loginType == 'username'? '' : 'username';
+			console.log(event);
 		},
 		even: function (numbers) {
 			return numbers.filter((n) => n % 2 === 0);

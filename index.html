@@ -48,11 +48,15 @@
   <p>Reversed: {{ reversedMessage }}</p>
 	<form action="https://google.com/" class="big" :class="classList" v-show="showForm">
 		<button type="submit" @click.prevent="onClick1">Перевернуть сообщение</button>
-	</form>
 
-	<template v-for="n in 10">
-		<b>Повторяющееся</b> <i>сообщение</i> <u>{{ n }}</u><br>
-	</template>
+		<template v-for="n in 10">
+			<b @click="alert(n)">Повторяющееся</b> <button type="submit" @click="warn(n, $event)">сообщение</button> <u>{{ n }}</u><br>
+		</template>
+	</form>
+	<br>
+	<label>
+		<input type="checkbox" v-model="checked" @click="checked = !checked"> {{ checked }}
+	</label>
 </div>
 
 <hr>
@@ -60,8 +64,8 @@
 <div id="app6">
   <p>{{ message }}</p>
   [ <span v-html="message" :style="{ color: activeColor, fontSize: fontSize + 'px', 'font-weight': fontWeight }"></span> ]
-  <input v-model="message" @click="onClick">
-  <textarea :disabled="isInputDisabled" :style="styleList">{{ message }}</textarea>
+  <input v-model.lazy="message" @click="onClick">
+  <textarea :disabled="isInputDisabled" :style="styleList">{{ message }} 111</textarea>
   <a :href="message" target="_blank">{{ message }}</a>
 
   <div :style="{ display: ['-webkit-box', '-ms-flexbox', 'flex'] }">
