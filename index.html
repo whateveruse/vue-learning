@@ -18,6 +18,14 @@
 	color: red;
 }
 
+.selected {
+	font-weight: bold;
+}
+
+.removed {
+	text-decoration: line-through;
+}
+
 </style>
 
 </head>
@@ -36,7 +44,7 @@
 <hr>
 
 <div id="app5">
-  <p>{{ message }}</p>
+  <p :class="[classSelected, classRemoved]">{{ message }}</p>
   <p>Reversed: {{ reversedMessage }}</p>
 	<form action="https://google.com/" class="big" :class="classList">
 		<button type="submit" @click.prevent="onClick1">Перевернуть сообщение</button>

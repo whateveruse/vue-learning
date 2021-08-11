@@ -130,6 +130,8 @@ var app5 = new Vue({
 	data: {
 		message: 'Привет, Vue.js!',
 		isActive: false,
+		classSelected: 'selected',
+		classRemoved: 'removed',
 	},
 	computed: {
 		// геттер вычисляемого значения
