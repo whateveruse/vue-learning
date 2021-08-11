@@ -24,7 +24,7 @@ Vue.component('app-nav', {
 
 Vue.component('app-sidebar', {
 	template: `
-		<span v-bind:title="message">
+		<span :title="message">
 		    Наведи на меня курсор на пару секунд,
 		    чтобы увидеть динамически связанное значение title!
 		</span>
@@ -47,8 +47,8 @@ Vue.component('app-content', {
 			<ol>
 				<todo-item
 					v-for="item in todos"
-					v-bind:todo="item"
-					v-bind:key="item.id"
+					:todo="item"
+					:key="item.id"
 				></todo-item>
 			</ol>
 
@@ -74,7 +74,7 @@ Vue.component('app-content', {
 
 Vue.component('app-view', {
 	//TODO!!! вложенные компоненты
-	template: '<span v-if="seen" v-bind:[someAttr]="message" v-on:[eventName]="onClick">{{ message }}</span>',
+	template: '<span v-if="seen" :[someAttr]="message" @[eventName]="onClick">{{ message }}</span>',
 	data: () => {
 		return {
 			seen: false,
@@ -103,7 +103,7 @@ Vue.component('todo-item', {
   // Имя входного параметра todo.
   props: ['todo'],
   template: `
-  	<li v-bind:id="'js-todo-item-' + todo.id">
+  	<li :id="'js-todo-item-' + todo.id">
   		{{ todo.text }}
   	</li>
   `

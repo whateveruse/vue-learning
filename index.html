@@ -20,7 +20,7 @@
   <p>{{ message }}</p>
   <p>Reversed: {{ message.split('').reverse().join('') }}</p>
 	<form action="https://google.com/">
-		<button type="submit" v-on:click.prevent="reverseMessage">Перевернуть сообщение</button>
+		<button type="submit" @click.prevent="reverseMessage">Перевернуть сообщение</button>
 	</form>
 </div>
 
@@ -30,8 +30,8 @@
   <p>{{ message }}</p>
   [ <span v-html="message"></span> ]
   <input v-model="message">
-  <textarea v-bind:disabled="isInputDisabled" >{{ message }}</textarea>
-  <a v-bind:href="message" target="_blank">{{ message }}</a>
+  <textarea :disabled="isInputDisabled" >{{ message }}</textarea>
+  <a :href="message" target="_blank">{{ message }}</a>
 </div>
 
 <script type="module" src="script.es6.js"></script>
