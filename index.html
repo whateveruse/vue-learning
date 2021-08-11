@@ -46,7 +46,7 @@
 <div id="app5">
   <p :class="[classSelected, classRemoved]">{{ message }}</p>
   <p>Reversed: {{ reversedMessage }}</p>
-	<form action="https://google.com/" class="big" :class="classList">
+	<form action="https://google.com/" class="big" :class="classList" v-show="showForm">
 		<button type="submit" @click.prevent="onClick1">Перевернуть сообщение</button>
 	</form>
 </div>
@@ -64,6 +64,17 @@
   		<input type="text" :value="firstName">
   		<input type="text" :value="lastName">
 	</div>
+
+	Login:<br>
+
+	<template v-if="loginType === 'username'">
+	  <label>Имя пользователя</label>
+	  <input placeholder="Введите имя пользователя" key="username-input">
+	</template>
+	<template v-else>
+	  <label>Email</label>
+	  <input placeholder="Введите адрес email" key="email-input">
+	</template>
 </div>
 
 <script type="module" src="script.es6.js"></script>

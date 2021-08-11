@@ -76,7 +76,22 @@ Vue.component('app-content', {
 
 Vue.component('app-view', {
 	//TODO!!! вложенные компоненты
-	template: '<span v-if="seen" :[someAttr]="message" @[eventName]="onClick">{{ message }}</span>',
+	template: `
+		<div>
+			<br>
+			<template v-if="seen" :[someAttr]="message" @[eventName]="onClick">
+				<p>{{ message }}</p>
+				<p>Абзац 2</p>
+	  			<p>Абзац 3</p>
+			</template>
+			<template v-else-if="Math.random() > 0.5">
+				<big>Какой-то баг...</big>
+			</template>
+			<template v-else>
+				<b>Содержимое</b> <i>скрыто</i>
+			</template>
+		</div>
+	`,
 	data: () => {
 		return {
 			seen: false,
@@ -142,6 +157,12 @@ var app5 = new Vue({
 		isActive: false,
 		classSelected: 'selected',
 		classRemoved: 'removed',
+		showForm: false,
+	},
+	created: function () {
+	    setTimeout(() => {
+	    	this.showForm = true;
+	    }, 1500);
 	},
 	computed: {
 		// геттер вычисляемого значения
@@ -182,6 +203,7 @@ var app6 = new Vue({
 		activeColor: 'green',
 		fontSize: 18,
 		fontWeight: 'normal',
+		loginType: 'username',
 	},
 	watch: {
 	    // эта функция запускается при любом изменении вопроса
@@ -214,6 +236,7 @@ var app6 = new Vue({
 			this.activeColor = 'brown';
 			this.fontSize = 24;
 			this.fontWeight = 'bold';
+			this.loginType = this.loginType == 'username'? '' : 'username';
 		}
 	}
 });
