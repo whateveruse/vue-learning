@@ -22,6 +22,17 @@ var app3 = new Vue({
 	}
 });
 
+var app4 = new Vue({
+	el: '#app4',
+	data: {
+		todos: [
+			{ text: 'Изучить JavaScript' },
+			{ text: 'Изучить Vue' },
+			{ text: 'Создать еще один JS фреймворк' }
+		]
+	}
+})
+
 setTimeout(() => {
 	app.message = 'новое сообщение';
 }, 1000);
@@ -33,3 +44,7 @@ setTimeout(() => {
 setTimeout(() => {
 	app3.seen = false;
 }, 3000);
+
+setTimeout(() => {
+	app4.todos.push({text: 'Profit'});
+}, 1500);

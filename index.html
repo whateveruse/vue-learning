@@ -24,6 +24,16 @@
   <span v-if="seen">Сейчас меня видно</span>
 </div>
 
+<hr>
+
+<div id="app4">
+  <ol>
+    <li v-for="todo in todos">
+      {{ todo.text }}
+    </li>
+  </ol>
+</div>
+
 <script type="module" src="script.es6.js"></script>
 <script nomodule src="script.js"></script>
 
