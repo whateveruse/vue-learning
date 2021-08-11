@@ -88,11 +88,21 @@ Vue.component('app-view', {
 	    	this.seen = true;
 	    }, 2500);
 	},
+	computed: {
+		// геттер вычисляемого значения
+		reversedMessage: function () {
+			// `this` указывает на экземпляр vm
+			return this.message.split('').reverse().join('');
+		}
+	},
 	methods: {
 		onClick: function () {
-			this.message = this.message.split('').reverse().join('');
+			this.reverseMessage();
 			this.eventName = null;
 			this.someAttr = 'title';
+		},
+		reverseMessage: function () {
+			this.message = this.reversedMessage;
 		}
 	}
 });
@@ -120,9 +130,16 @@ var app5 = new Vue({
 	data: {
 		message: 'Привет, Vue.js!'
 	},
+	computed: {
+		// геттер вычисляемого значения
+		reversedMessage: function () {
+			// `this` указывает на экземпляр vm
+			return this.message.split('').reverse().join('');
+		}
+	},
 	methods: {
 		reverseMessage: function () {
-			this.message = this.message.split('').reverse().join('')
+			this.message = this.reversedMessage;
 		}
 	}
 });
