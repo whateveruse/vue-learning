@@ -27,6 +27,8 @@
   <p>{{ message }}</p>
   [ <span v-html="message"></span> ]
   <input v-model="message">
+  <textarea>{{ message }}</textarea>
+  <a v-bind:href="message" target="_blank">{{ message }}</a>
 </div>
 
 <script type="module" src="script.es6.js"></script>
