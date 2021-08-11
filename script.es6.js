@@ -128,7 +128,8 @@ var app = new Vue({
 var app5 = new Vue({
 	el: '#app5',
 	data: {
-		message: 'Привет, Vue.js!'
+		message: 'Привет, Vue.js!',
+		isActive: false,
 	},
 	computed: {
 		// геттер вычисляемого значения
@@ -140,7 +141,16 @@ var app5 = new Vue({
 	methods: {
 		reverseMessage: function () {
 			this.message = this.reversedMessage;
-		}
+		},
+		hasError: function () {
+			var res = (Math.random() * 50);
+			console.log(res);
+			return res > 25;
+		},
+		onClick1: function () {
+			this.reverseMessage();
+			this.isActive = !this.isActive;
+		},
 	}
 });
 
