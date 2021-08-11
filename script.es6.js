@@ -43,13 +43,18 @@ Vue.component('app-sidebar', {
 
 Vue.component('app-content', {
 	template: `
-		<ol>
-			<todo-item
-				v-for="item in todos"
-				v-bind:todo="item"
-				v-bind:key="item.id"
-			></todo-item>
-		</ol>
+		<div>
+			<ol>
+				<todo-item
+					v-for="item in todos"
+					v-bind:todo="item"
+					v-bind:key="item.id"
+				></todo-item>
+			</ol>
+
+			<h3>Total + 1: {{ todos.length + 1 }}</h3>
+			<h4>{{ todos.length > 3 ? 'todos.length > 3' : 'todos.length <= 3' }}</h4>
+		</div>
 	`,
 	data: () => {
 		return {
