@@ -1,24 +1,57 @@
 
 import Vue from 'https://cdn.jsdelivr.net/npm/vue@2/dist/vue.esm.browser.js';
 
-var app = new Vue({
-	el: '#app',
-	data: {
-		message: 'Привет, Vue!'
+Vue.component('app-nav', {
+	template: '<h1>{{ message }}</h1>',
+	data: () => {
+		return {
+			message: 'Привет, Vue!'
+		};
 	}
 });
 
-var app2 = new Vue({
-	el: '#app2',
-	data: {
-		message: 'Вы загрузили эту страницу: ' + new Date().toLocaleString()
+Vue.component('app-sidebar', {
+	template: `
+		<span v-bind:title="message">
+		    Наведи на меня курсор на пару секунд,
+		    чтобы увидеть динамически связанное значение title!
+		</span>
+	`,
+	data: () => {
+		return {
+			message: 'Вы загрузили эту страницу: ' + new Date().toLocaleString()
+		};
 	}
 });
 
-var app3 = new Vue({
-	el: '#app3',
-	data: {
-		seen: true
+Vue.component('app-content', {
+	template: `
+		<ol>
+			<todo-item
+				v-for="item in todos"
+				v-bind:todo="item"
+				v-bind:key="item.id"
+			></todo-item>
+		</ol>
+	`,
+	data: () => {
+		return {
+			todos: [
+				{ id: 0, text: 'Изучить JavaScript' },
+				{ id: 1, text: 'Изучить Vue' },
+				{ id: 2, text: 'Создать еще один JS фреймворк' }
+			]
+		};
+	}
+});
+
+Vue.component('app-view', {
+	//TODO!!! вложенные компоненты
+	template: '<span v-if="seen">Сейчас меня видно</span>',
+	data: () => {
+		return {
+			seen: true
+		};
 	}
 });
 
@@ -30,14 +63,9 @@ Vue.component('todo-item', {
   template: '<li>{{ todo.text }}</li>'
 });
 
-var app4 = new Vue({
-	el: '#app4',
+var app = new Vue({
+	el: '#app',
 	data: {
-		todos: [
-			{ id: 0, text: 'Изучить JavaScript' },
-			{ id: 1, text: 'Изучить Vue' },
-			{ id: 2, text: 'Создать еще один JS фреймворк' }
-		]
 	}
 });
 
@@ -61,21 +89,5 @@ var app6 = new Vue({
 });
 
 setTimeout(() => {
-	app.message = 'новое сообщение';
 	app6.message = '12345';
 }, 1000);
-
-setTimeout(() => {
-	app2.message = 'новое значение [' + Math.ceil(50 + Math.random() * 90) + ']';
-}, 500);
-
-setTimeout(() => {
-	app3.seen = false;
-}, 3000);
-
-setTimeout(() => {
-	app4.todos.push({
-		id: 4,
-		text: 'Profit'
-	});
-}, 1500);

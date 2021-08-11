@@ -6,34 +6,11 @@
 <body>
 
 <div id="app">
-  {{ message }}
-</div>
-
-<hr>
-
-<div id="app2">
-  <span v-bind:title="message">
-    Наведи на меня курсор на пару секунд,
-    чтобы увидеть динамически связанное значение title!
-  </span>
-</div>
-
-<hr>
-
-<div id="app3">
-  <span v-if="seen">Сейчас меня видно</span>
-</div>
-
-<hr>
-
-<div id="app4">
-  <ol>
-    <todo-item
-      v-for="item in todos"
-      v-bind:todo="item"
-      v-bind:key="item.id"
-    ></todo-item>
-  </ol>
+	<app-nav></app-nav>
+	<app-view>
+	    <app-sidebar></app-sidebar>
+	    <app-content></app-content>
+	</app-view>
 </div>
 
 <hr>
