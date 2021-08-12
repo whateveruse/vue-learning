@@ -325,3 +325,53 @@ setTimeout(() => {
 	app6.message = '<i><b>12345</b></i>';
 	app6.isInputDisabled = true;
 }, 1000);
+
+// dynamic component
+
+Vue.component("tab-home", {
+	data: function () {
+		return {
+			userName: 'user name 1',
+		};
+	},
+	template: `
+		<div>
+			<label>Имя пользователя</label>
+		  	<custom-input v-model="userName" :placeholder="'Введите имя пользователя'" key="username-input"></custom-input>
+		</div>
+	`
+});
+
+Vue.component("tab-posts", {
+	template: `
+		<div>
+			<label>Email</label>
+			<input placeholder="Введите адрес email" key="email-input">
+		</div>
+	`
+});
+
+Vue.component("tab-archive", {
+	template: `
+		<div>
+			PHP, HTML, MYSQL
+		</div>
+	`
+});
+
+new Vue({
+	el: "#dynamic-component-demo",
+	data: {
+	  currentTab: "Home",
+	  tabs: [
+	  	"Home",
+	  	"Posts",
+	  	"Archive",
+	  ]
+	},
+	computed: {
+	  currentTabComponent: function () {
+	    return 'tab-' + this.currentTab.toLowerCase();
+	  }
+	}
+});

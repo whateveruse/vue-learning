@@ -77,7 +77,7 @@
 
 	<template v-if="loginType === 'username'">
 	  <label>Имя пользователя</label>
-	  <custom-input v-model="userName" :placeholder="'Введите имя пользователя'" key="username-input">
+	  <custom-input v-model="userName" :placeholder="'Введите имя пользователя'" key="username-input"></custom-input>
 	</template>
 	<template v-else>
 	  <label>Email</label>
@@ -91,6 +91,18 @@
 	    <li v-for="n in even(set)">{{ n }}</li>
 	  </ul>
 	</template>
+</div>
+
+<div id="dynamic-component-demo" class="demo">
+  <button
+    v-for="tab in tabs"
+    :key="tab"
+    :class="['tab-button', { active: currentTab === tab }]"
+    @click="currentTab = tab"
+  >
+    {{ tab }}
+  </button>
+  <component :is="currentTabComponent" class="tab"></component>
 </div>
 
 <script type="module" src="script.es6.js"></script>
