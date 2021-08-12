@@ -118,7 +118,10 @@
   >
     {{ tab }}
   </button>
-  <component :is="currentTabComponent" class="tab"></component>
+
+  	<keep-alive>
+  		<component :is="currentTabComponent" class="tab"></component>
+	<keep-alive>
 </div>
 
 <script type="module" src="script.es6.js"></script>
