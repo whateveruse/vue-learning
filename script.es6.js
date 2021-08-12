@@ -109,6 +109,7 @@ Vue.component('todo-item', {
 	  	'prefix',
 	  	'idx',
 	],
+	inject: ['getMap'],
 	inheritAttrs: false,
 	template: `
 		<li :id="'js-todo-item-' + todo.id">
@@ -123,6 +124,8 @@ Vue.component('todo-item', {
 	`,
 	methods: {
 		getTitle: function (code) {
+			console.log('test inject', this.getMap());
+
 			switch (code) {
 				case 'id':
 					return 'Идентификатор';
@@ -171,6 +174,11 @@ Vue.component('app-content', {
 			</footer>
 		</div>
 	`,
+	provide: function () {
+		return {
+			getMap: this.getMap
+		}
+	},
 	data: () => {
 		return {
 			prefix: ' ----> ',
@@ -187,6 +195,11 @@ Vue.component('app-content', {
 	    }, 1500);
 	},
 	methods: {
+		getMap: function () {
+			return {
+				'this-is': 'map'
+			};
+		},
 		processTodos: function (event) {
 			console.log('processTodos', event);
 			this.todos.sort((v) => Math.random() > 0.5);
