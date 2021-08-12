@@ -55,6 +55,7 @@ Vue.component('todo-item', {
 			<ul id="v-for-object" class="demo">
 				<li v-for="(value, name, index) in todo">
 			    	<i>{{ index + 1}}.</i> {{ getTitle(name) }}: {{ value }}
+			    	<button @click="$emit('eventforparentcomponent')">[+]</button>
 				</li>
 			</ul>
 		</li>
@@ -69,6 +70,9 @@ Vue.component('todo-item', {
 				default:
 					return '';
 			}
+		},
+		test1: function (event) {
+			console.log(event.target);
 		}
 	}
 });
@@ -84,6 +88,7 @@ Vue.component('app-content', {
 					class="selected removed"
 					:prefix="prefix"
 					:idx="index"
+					@eventforparentcomponent="testEventForParentComponent1"
 				></todo-item>
 			</ol>
 
@@ -108,9 +113,12 @@ Vue.component('app-content', {
 	},
 	methods: {
 		processTodos: function (event) {
-			console.log(event);
+			console.log('processTodos', event);
 			this.todos.sort((v) => Math.random() > 0.5);
-		}
+		},
+		testEventForParentComponent1: function (event) {
+			console.log('testEventForParentComponent1', event);
+		},
 	},
 });
 
