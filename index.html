@@ -34,7 +34,7 @@
 
 <div id="app">
 	<app-nav :class="classList">
-		<template v-slot:default="slotProps">
+		<template #default="slotProps">
 			<h1>{{ slotProps.message }}</h1>
 		</template>
 	</app-nav>
@@ -43,13 +43,13 @@
 	    <app-content>
 	    </app-content>
 	    <app-content>
-	    	<template v-slot:header>
+	    	<template #header>
 		    	<h1>Место для вашей рекламы</h1>
 		  	</template>
 
 		  	11111
 
-		  	<template v-slot:footer>
+		  	<template #footer>
 		    	<h5>Некая контактная информация</h5>
 		  	</template>
 	    </app-content>
