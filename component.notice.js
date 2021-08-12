@@ -1,11 +1,11 @@
 
 export var ComponentNotice = {
 	props: [
-		'message',
+		'thisIsMessage',
 	],
 	template: `
 		<div style="color: red; font-size: 35px;background-color:yellow;">
-			{{ message }}
+			{{ thisIsMessage }}
 		</div>
 	`
 };
