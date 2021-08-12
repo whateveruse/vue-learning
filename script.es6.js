@@ -1,7 +1,7 @@
 
 import Vue from 'https://cdn.jsdelivr.net/npm/vue@2/dist/vue.esm.browser.js';
 
-Vue.component('component-mikrofrontend', {
+var LocalComponentMikrofrontend = {
 	props: [
 		'n',
 	],
@@ -28,7 +28,7 @@ Vue.component('component-mikrofrontend', {
 			<button type="submit" @click="warn(n, $event)">сообщение</button> <u>{{ n }}</u><br>
 		</div>
 	`
-});
+};
 
 Vue.component('custom-input', {
 	props: [
@@ -239,6 +239,9 @@ var app5 = new Vue({
 		classRemoved: 'removed',
 		showForm: false,
 		checked: false,
+	},
+	components: {
+		'component-mikrofrontend': LocalComponentMikrofrontend,
 	},
 	created: function () {
 	    setTimeout(() => {
