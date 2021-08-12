@@ -1,8 +1,14 @@
 
 export var ComponentNotice = {
 	props: {
-		thisIsMessage: String,
-		fontSize: Number,
+		thisIsMessage: {
+			type: String,
+			required: true
+	    },
+		fontSize: {
+			type: Number,
+			default: 100,
+		},
 		data: Array,
 		data2: Object,
 	},

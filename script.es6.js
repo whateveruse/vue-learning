@@ -182,6 +182,12 @@ Vue.component('app-view', {
 				:data2="{ colored: true }"
 			></component-notice>
 
+			<component-notice
+				:this-is-message="'12345'"
+				:data="['?', '?', '?']"
+				:data2="{ colored: true }"
+			></component-notice>
+
 			<template v-if="seen" :[someAttr]="message" @[eventName]="onClick">
 				<p>{{ message }}</p>
 				<p>Абзац 2</p>
