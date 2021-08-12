@@ -185,7 +185,6 @@ Vue.component('app-view', {
 			<component-notice
 				:this-is-message="'12345'"
 				:data="['?', '?', '?']"
-				:data2="{ colored: true }"
 			></component-notice>
 
 			<template v-if="seen" :[someAttr]="message" @[eventName]="onClick">

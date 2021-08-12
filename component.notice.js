@@ -8,9 +8,18 @@ export var ComponentNotice = {
 		fontSize: {
 			type: Number,
 			default: 100,
+			validator: (value) => [100, 50, 30, 9].indexOf(value) !== -1,
 		},
 		data: Array,
-		data2: Object,
+		data2: {
+			type: Object,
+			default: function () {
+				return {
+					notcolored: true,
+					any: true,
+				}
+			}
+		},
 	},
 	computed: {
 	  size: function () {
