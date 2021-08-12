@@ -1,10 +1,11 @@
 
 export var ComponentNotice = {
-	props: [
-		'thisIsMessage',
-	],
+	props: {
+		thisIsMessage: String,
+		fontSize: Number,
+	},
 	template: `
-		<div style="color: red; font-size: 35px;background-color:yellow;">
+		<div style="color: red; background-color:yellow;" :style="{ fontSize: fontSize + 'px' }">
 			{{ thisIsMessage }}
 		</div>
 	`
