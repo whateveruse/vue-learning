@@ -2,6 +2,11 @@
 import Vue from 'https://cdn.jsdelivr.net/npm/vue@2/dist/vue.esm.browser.js';
 import { ComponentNotice } from './component.notice.js';
 
+Vue.component(
+  'lazy-header',
+  () => import('./component.lazy-header.js')
+)
+
 var LocalComponentMikrofrontend = {
 	props: [
 		'n',
