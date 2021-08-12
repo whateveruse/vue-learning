@@ -93,10 +93,11 @@ Vue.component('todo-item', {
 	  	'prefix',
 	  	'idx',
 	],
+	inheritAttrs: false,
 	template: `
 		<li :id="'js-todo-item-' + todo.id">
 			{{ prefix }} [{{ idx }}]
-			<ul id="v-for-object" class="demo">
+			<ul id="v-for-object" class="demo" v-bind="$attrs">
 				<li v-for="(value, name, index) in todo">
 			    	<i>{{ index + 1}}.</i> {{ getTitle(name) }}: {{ value }}
 			    	<button @click="$emit('eventforparentcomponent', index, name)">[+]</button>
@@ -126,6 +127,9 @@ Vue.component('app-content', {
 		<div>
 			<ol @click="processTodos">
 				<todo-item
+					required
+					enabled
+					selected
 					v-for="(item, index) in todos"
 					:todo="item"
 					:key="item.id"
@@ -176,10 +180,12 @@ Vue.component('app-view', {
 			<br>
 
 			<component-notice
+				target="_blank"
 				:this-is-message="message + ' '"
 				:font-size="9"
 				:data="['?', '?', '?']"
 				:data2="{ colored: true }"
+				class="bfg2000"
 			></component-notice>
 
 			<component-notice
