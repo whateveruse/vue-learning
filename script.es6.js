@@ -174,7 +174,14 @@ Vue.component('app-view', {
 		<div>
 			<slot></slot>
 			<br>
-			<component-notice :this-is-message="message + ' ???'" :font-size="9"></component-notice>
+
+			<component-notice
+				:this-is-message="message + ' '"
+				:font-size="9"
+				:data="['?', '?', '?']"
+				:data2="{ colored: true }"
+			></component-notice>
+
 			<template v-if="seen" :[someAttr]="message" @[eventName]="onClick">
 				<p>{{ message }}</p>
 				<p>Абзац 2</p>
