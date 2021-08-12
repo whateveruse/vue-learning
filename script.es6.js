@@ -1,5 +1,6 @@
 
 import Vue from 'https://cdn.jsdelivr.net/npm/vue@2/dist/vue.esm.browser.js';
+import { ComponentNotice } from './component.notice.js';
 
 var LocalComponentMikrofrontend = {
 	props: [
@@ -166,10 +167,14 @@ Vue.component('app-content', {
 });
 
 Vue.component('app-view', {
+	components: {
+		'component-notice': ComponentNotice,
+	},
 	template: `
 		<div>
 			<slot></slot>
 			<br>
+			<component-notice :message="message"></component-notice>
 			<template v-if="seen" :[someAttr]="message" @[eventName]="onClick">
 				<p>{{ message }}</p>
 				<p>Абзац 2</p>
