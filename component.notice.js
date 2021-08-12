@@ -6,6 +6,11 @@ export var ComponentNotice = {
 		data: Array,
 		data2: Object,
 	},
+	computed: {
+	  size: function () {
+	  	return Math.max(this.fontSize, 30);
+	  }
+	},
 	data: function () {
 		return {
 			message: this.thisIsMessage
@@ -21,7 +26,7 @@ export var ComponentNotice = {
 	},
 	template: `
 		<div style="color: red; background-color:yellow;"
-			:style="{ fontSize: fontSize + 'px', data2 }"
+			:style="{ fontSize: size + 'px' }"
 			:class="data2"
 		>
 			<span v-html="message"></span>
