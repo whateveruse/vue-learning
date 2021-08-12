@@ -194,7 +194,7 @@ Vue.component('app-view', {
 			></component-notice>
 
 			<component-notice
-				:this-is-message="'12345'"
+				:this-is-message.sync="message"
 				:data="['?', '?', '?']"
 			></component-notice>
 

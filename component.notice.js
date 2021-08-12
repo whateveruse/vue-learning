@@ -38,6 +38,12 @@ export var ComponentNotice = {
 	    setTimeout(() => {
 	    	this.message += ' <i>' + this.message + '</i>';
 	    }, 3000);
+
+	    setTimeout(() => {
+	    	this.$emit('update:thisIsMessage', 'bfg2000');
+	    }, 5000);
+
+
 	},
 	template: `
 		<div style="color: red; background-color:yellow;"
