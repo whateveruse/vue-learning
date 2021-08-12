@@ -49,9 +49,10 @@
 	<form action="https://google.com/" class="big" :class="classList" v-show="showForm">
 		<button type="submit" @click.prevent="onClick1">Перевернуть сообщение</button>
 
-		<template v-for="n in 10">
-			<b @click="alert(n)">Повторяющееся</b> <button type="submit" @click="warn(n, $event)">сообщение</button> <u>{{ n }}</u><br>
-		</template>
+		<h3>компонент - микрофронтэнд</h3>
+		<table>
+		  <tr v-for="n in 10"><td is="component-mikrofrontend" :n="n"></td></tr>
+		</table>
 	</form>
 	<br>
 	<label>

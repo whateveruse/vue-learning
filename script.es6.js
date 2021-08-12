@@ -1,6 +1,35 @@
 
 import Vue from 'https://cdn.jsdelivr.net/npm/vue@2/dist/vue.esm.browser.js';
 
+Vue.component('component-mikrofrontend', {
+	props: [
+		'n',
+	],
+	data: function () {
+		return {
+
+		};
+	},
+	methods: {
+		alert: function (msg) {
+			alert(msg);
+		},
+		warn: function (message, event) {
+		    if (event) {
+		    	event.preventDefault();
+		    	message += ' ' + event.target.textContent;
+		    }
+		    alert(message);
+		}
+	},
+	template: `
+		<div>
+			<b @click="alert(n)">Повторяющееся</b>
+			<button type="submit" @click="warn(n, $event)">сообщение</button> <u>{{ n }}</u><br>
+		</div>
+	`
+});
+
 Vue.component('custom-input', {
 	props: [
 		'value',
