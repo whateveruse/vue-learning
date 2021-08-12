@@ -105,7 +105,7 @@ Vue.component('todo-item', {
 			<ul id="v-for-object" class="demo" v-bind="$attrs">
 				<li v-for="(value, name, index) in todo">
 			    	<i>{{ index + 1}}.</i> {{ getTitle(name) }}: {{ value }}
-			    	<button @click="$emit('eventforparentcomponent', index, name)">[+]</button>
+			    	<button @click="$emit('event-for-parent-component', index, name)">[+]</button>
 				</li>
 			</ul>
 		</li>
@@ -141,7 +141,7 @@ Vue.component('app-content', {
 					class="selected removed"
 					:prefix="prefix"
 					:idx="index"
-					@eventforparentcomponent="testEventForParentComponent1"
+					@event-for-parent-component="testEventForParentComponent1"
 				></todo-item>
 			</ol>
 
