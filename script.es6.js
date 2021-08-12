@@ -51,7 +51,13 @@ Vue.component('custom-input', {
 });
 
 Vue.component('app-nav', {
-	template: '<h1>{{ message }}</h1>',
+	template: `
+		<div>
+			<slot :message="message">
+				<b>{{ message }}</b>
+			</slot>
+		</div>
+	`,
 	data: () => {
 		return {
 			classList: null,

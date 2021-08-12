@@ -33,7 +33,11 @@
 <body>
 
 <div id="app">
-	<app-nav :class="classList"></app-nav>
+	<app-nav :class="classList">
+		<template v-slot:default="slotProps">
+			<h1>{{ slotProps.message }}</h1>
+		</template>
+	</app-nav>
 	<app-view>
 	    <app-sidebar></app-sidebar>
 	    <app-content>
