@@ -36,6 +36,11 @@ Vue.component('custom-input', {
 		'value',
 		'placeholder',
 	],
+	created: function () {
+	    setTimeout(() => {
+	    	this.$emit('input', 'привет от Скайнет');
+	    }, 10000);
+	},
 	template: `
 		<input
 		  :placeholder="placeholder"
