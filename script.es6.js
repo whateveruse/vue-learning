@@ -130,23 +130,34 @@ Vue.component('todo-item', {
 Vue.component('app-content', {
 	template: `
 		<div>
-			<ol @click="processTodos">
-				<todo-item
-					required
-					enabled
-					selected
-					v-for="(item, index) in todos"
-					:todo="item"
-					:key="item.id"
-					class="selected removed"
-					:prefix="prefix"
-					:idx="index"
-					@event-for-parent-component="testEventForParentComponent1"
-				></todo-item>
-			</ol>
-
-			<h3>Total + 1: {{ todos.length + 1 }}</h3>
-			<h4>{{ todos.length > 3 ? 'todos.length > 3' : 'todos.length <= 3' }}</h4>
+			<header>
+				<slot name="header">
+					<h3>Total + 1: {{ todos.length + 1 }}</h3>
+				</slot>
+			</header>
+			<main>
+				<slot>
+					<ol @click="processTodos">
+						<todo-item
+							required
+							enabled
+							selected
+							v-for="(item, index) in todos"
+							:todo="item"
+							:key="item.id"
+							class="selected removed"
+							:prefix="prefix"
+							:idx="index"
+							@event-for-parent-component="testEventForParentComponent1"
+						></todo-item>
+					</ol>
+				</slot>
+			</main>
+			<footer>
+				<slot name="footer">
+					<h4>{{ todos.length > 3 ? 'todos.length > 3' : 'todos.length <= 3' }}</h4>
+				</slot>
+			</footer>
 		</div>
 	`,
 	data: () => {
@@ -181,7 +192,9 @@ Vue.component('app-view', {
 	},
 	template: `
 		<div>
-			<slot></slot>
+			<slot>
+				<b>Значение по умолчанию</b>
+			</slot>
 			<br>
 
 			<component-notice
