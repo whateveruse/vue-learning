@@ -283,6 +283,7 @@ Vue.component('app-view', {
 
 var app = new Vue({
 	el: '#app',
+	template: '#app-template',
 	data: {
 	},
 	computed: {
@@ -297,6 +298,7 @@ var app = new Vue({
 
 var app5 = new Vue({
 	el: '#app5',
+	template: '#app5-template',
 	data: {
 		message: 'Привет, Vue.js!',
 		isActive: false,
@@ -355,6 +357,7 @@ var app5 = new Vue({
 
 var app6 = new Vue({
 	el: '#app6',
+	template: '#app6-template',
 	data: {
 		message: 'Привет, Vue!',
 		isInputDisabled: false,
@@ -458,6 +461,7 @@ Vue.component("tab-archive", {
 
 new Vue({
 	el: "#dynamic-component-demo",
+	template: '#dynamic-component-demo-template',
 	data: {
 	  currentTab: "Home",
 	  tabs: [

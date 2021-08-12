@@ -32,106 +32,119 @@
 
 <body>
 
-<div id="app">
-	<app-nav :class="classList">
-		<template #default="slotProps">
-			<h1>{{ slotProps.message }}</h1>
-		</template>
-	</app-nav>
-	<app-view>
+<div id="app"></div>
+<div id="app5"></div>
+<div id="app6"></div>
+<div id="dynamic-component-demo" class="demo"></div>
 
-		<lazy-header>
-			<h1>
-			<i>
-				Компонент который подгрузился асинхронно
-			</i>
-			</h1>
-		</lazy-header>
+<script type="text/x-template" id="app-template">
+	<div>
+		<app-nav :class="classList">
+			<template #default="slotProps">
+				<h1>{{ slotProps.message }}</h1>
+			</template>
+		</app-nav>
+		<app-view>
 
-	    <app-sidebar></app-sidebar>
-	    <app-content>
-	    </app-content>
-	    <app-content>
-	    	<template #header>
-		    	<h1>Место для вашей рекламы</h1>
-		  	</template>
+			<lazy-header>
+				<h1>
+				<i>
+					Компонент который подгрузился асинхронно
+				</i>
+				</h1>
+			</lazy-header>
 
-		  	11111
+		    <app-sidebar></app-sidebar>
+		    <app-content>
+		    </app-content>
+		    <app-content>
+		    	<template #header>
+			    	<h1>Место для вашей рекламы</h1>
+			  	</template>
 
-		  	<template #footer>
-		    	<h5>Некая контактная информация</h5>
-		  	</template>
-	    </app-content>
-	</app-view>
-</div>
+			  	11111
 
-<hr>
-
-<div id="app5">
-  <p :class="[classSelected, classRemoved]">{{ message }}</p>
-  <p>Reversed: {{ reversedMessage }}</p>
-	<form action="https://google.com/" class="big" :class="classList" v-show="showForm">
-		<button type="submit" @click.prevent="onClick1">Перевернуть сообщение</button>
-
-		<h3>компонент - микрофронтэнд</h3>
-		<table>
-		  <tr v-for="n in 10"><td is="component-mikrofrontend" :n="n"></td></tr>
-		</table>
-	</form>
-	<br>
-	<label>
-		<input type="checkbox" v-model="checked" @click="checked = !checked"> {{ checked }}
-	</label>
-</div>
-
-<hr>
-
-<div id="app6">
-  <p>{{ message }}</p>
-  [ <span v-html="message" :style="{ color: activeColor, fontSize: fontSize + 'px', 'font-weight': fontWeight }"></span> ]
-  <input v-model.lazy="message" @click="onClick">
-  <textarea :disabled="isInputDisabled" :style="styleList">{{ message }} 111</textarea>
-  <a :href="message" target="_blank">{{ message }}</a>
-
-  <div :style="{ display: ['-webkit-box', '-ms-flexbox', 'flex'] }">
-  		<input type="text" :value="firstName">
-  		<input type="text" :value="lastName">
+			  	<template #footer>
+			    	<h5>Некая контактная информация</h5>
+			  	</template>
+		    </app-content>
+		</app-view>
 	</div>
+</script>
 
-	Login:<br>
+<script type="text/x-template" id="app5-template">
+	<div>
+		<hr>
 
-	<template v-if="loginType === 'username'">
-	  <label>Имя пользователя</label>
-	  <custom-input v-model="userName" :placeholder="'Введите имя пользователя'" key="username-input"></custom-input>
-	</template>
-	<template v-else>
-	  <label>Email</label>
-	  <input placeholder="Введите адрес email" key="email-input">
-	  <p>Подсказка1:</p>
-	  <ul>
-	  	<li v-for="n in evenNumbers">{{ n }}</li>
-	  </ul>
-	  <p>Подсказка2:</p>
-	  <ul v-for="set in sets">
-	    <li v-for="n in even(set)">{{ n }}</li>
-	  </ul>
-	</template>
-</div>
+	  <p :class="[classSelected, classRemoved]">{{ message }}</p>
+	  <p>Reversed: {{ reversedMessage }}</p>
+		<form action="https://google.com/" class="big" :class="classList" v-show="showForm">
+			<button type="submit" @click.prevent="onClick1">Перевернуть сообщение</button>
 
-<div id="dynamic-component-demo" class="demo">
-  <button
-    v-for="tab in tabs"
-    :key="tab"
-    :class="['tab-button', { active: currentTab === tab }]"
-    @click="currentTab = tab"
-  >
-    {{ tab }}
-  </button>
+			<h3>компонент - микрофронтэнд</h3>
+			<table>
+			  <tr v-for="n in 10"><td is="component-mikrofrontend" :n="n"></td></tr>
+			</table>
+		</form>
+		<br>
+		<label>
+			<input type="checkbox" v-model="checked" @click="checked = !checked"> {{ checked }}
+		</label>
+	</div>
+</script>
 
-  	<keep-alive>
-  		<component :is="currentTabComponent" class="tab"></component>
-	<keep-alive>
-</div>
+<script type="text/x-template" id="app6-template">
+	<div>
+		<hr>
+
+	  <p>{{ message }}</p>
+	  [ <span v-html="message" :style="{ color: activeColor, fontSize: fontSize + 'px', 'font-weight': fontWeight }"></span> ]
+	  <input v-model.lazy="message" @click="onClick">
+	  <textarea :disabled="isInputDisabled" :style="styleList">{{ message }} 111</textarea>
+	  <a :href="message" target="_blank">{{ message }}</a>
+
+	  <div :style="{ display: ['-webkit-box', '-ms-flexbox', 'flex'] }">
+	  		<input type="text" :value="firstName">
+	  		<input type="text" :value="lastName">
+		</div>
+
+		Login:<br>
+
+		<template v-if="loginType === 'username'">
+		  <label>Имя пользователя</label>
+		  <custom-input v-model="userName" :placeholder="'Введите имя пользователя'" key="username-input"></custom-input>
+		</template>
+		<template v-else>
+		  <label>Email</label>
+		  <input placeholder="Введите адрес email" key="email-input">
+		  <p>Подсказка1:</p>
+		  <ul>
+		  	<li v-for="n in evenNumbers">{{ n }}</li>
+		  </ul>
+		  <p>Подсказка2:</p>
+		  <ul v-for="set in sets">
+		    <li v-for="n in even(set)">{{ n }}</li>
+		  </ul>
+		</template>
+	</div>
+</script>
+
+<script type="text/x-template" id="dynamic-component-demo-template">
+	<div>
+	  <button
+	    v-for="tab in tabs"
+	    :key="tab"
+	    :class="['tab-button', { active: currentTab === tab }]"
+	    @click="currentTab = tab"
+	  >
+	    {{ tab }}
+	  </button>
+
+	  	<keep-alive>
+	  		<component :is="currentTabComponent" class="tab"></component>
+		</keep-alive>
+	</div>
+</script>
 
 <script type="module" src="script.es6.js"></script>
 <script nomodule src="script.js"></script>
