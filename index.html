@@ -77,7 +77,7 @@
 
 	<template v-if="loginType === 'username'">
 	  <label>Имя пользователя</label>
-	  <input placeholder="Введите имя пользователя" key="username-input">
+	  <custom-input v-model="userName" :placeholder="'Введите имя пользователя'" key="username-input">
 	</template>
 	<template v-else>
 	  <label>Email</label>

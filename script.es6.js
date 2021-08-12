@@ -1,6 +1,20 @@
 
 import Vue from 'https://cdn.jsdelivr.net/npm/vue@2/dist/vue.esm.browser.js';
 
+Vue.component('custom-input', {
+	props: [
+		'value',
+		'placeholder',
+	],
+	template: `
+		<input
+		  :placeholder="placeholder"
+	      :value="value"
+	      @input="$emit('input', $event.target.value)"
+	    >
+	`
+});
+
 Vue.component('app-nav', {
 	template: '<h1>{{ message }}</h1>',
 	data: () => {
@@ -253,6 +267,7 @@ var app6 = new Vue({
 		fontSize: 18,
 		fontWeight: 'normal',
 		loginType: 'username',
+		userName: 'test5',
 
 		sets: [
 			[ 1, 2, 3, 4, 5 ],
@@ -264,7 +279,10 @@ var app6 = new Vue({
 	    // эта функция запускается при любом изменении вопроса
 	    message: function (newValue, oldValue) {
 			console.log('ajax search: ', newValue, oldValue);
-	    }
+	    },
+	    userName: function (newValue, oldValue) {
+	    	console.log(newValue + ' -> ' + oldValue);
+	    },
 	},
 	computed: {
 		fullName: {
