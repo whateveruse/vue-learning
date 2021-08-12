@@ -137,9 +137,9 @@ Vue.component('app-content', {
 });
 
 Vue.component('app-view', {
-	//TODO!!! вложенные компоненты
 	template: `
 		<div>
+			<slot></slot>
 			<br>
 			<template v-if="seen" :[someAttr]="message" @[eventName]="onClick">
 				<p>{{ message }}</p>
