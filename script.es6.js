@@ -2,9 +2,41 @@
 import Vue from 'https://cdn.jsdelivr.net/npm/vue@2/dist/vue.esm.browser.js';
 import { ComponentNotice } from './component.notice.js';
 
+Vue.directive('focus', {
+	// Когда привязанный элемент вставлен в DOM...
+	inserted: function (el) {
+		// Переключаем фокус на элемент
+		console.log(el);
+		el.focus()
+	},
+	bind: function (el, binding, vnode) {
+	    console.log('focus directive bind', {
+	      'name'       : (binding.name),
+	      'value'      : (binding.value),
+	      'expression' : (binding.expression),
+	      'argument'   : (binding.arg),
+	      'modifiers: '  : (binding.modifiers),
+	      'vnode keys: ' : Object.keys(vnode).join(', ')
+	  });
+	}
+});
+
+Vue.directive('color-switch', function (el, binding) {
+	el.style.backgroundColor = binding.value
+})
+
+Vue.mixin({
+	created: function () {
+		var myOption = this.message;
+		if (myOption) {
+			console.log('наверное можно использовать для отладки', myOption);
+		}
+	}
+})
+
 Vue.component(
-  'lazy-header',
-  () => import('./component.lazy-header.js')
+	'lazy-header',
+	() => import('./component.lazy-header.js')
 )
 
 var LocalComponentMikrofrontend = {
@@ -221,14 +253,17 @@ Vue.component('app-view', {
 			</slot>
 			<br>
 
-			<component-notice
-				target="_blank"
-				:this-is-message="message + ' '"
-				:font-size="9"
-				:data="['?', '?', '?']"
-				:data2="{ colored: true }"
-				class="bfg2000"
-			></component-notice>
+			<transition name="fade">
+				<component-notice
+				 	v-if="seen"
+					target="_blank"
+					:this-is-message="message + ' '"
+					:font-size="9"
+					:data="['?', '?', '?']"
+					:data2="{ colored: true }"
+					class="bfg2000"
+				></component-notice>
+			</transition>
 
 			<component-notice
 				:this-is-message.sync="message"
@@ -237,8 +272,8 @@ Vue.component('app-view', {
 
 			<template v-if="seen" :[someAttr]="message" @[eventName]="onClick">
 				<p>{{ message }}</p>
-				<p>Абзац 2</p>
-	  			<p>Абзац 3</p>
+	  			<p>Абзац 2</p>
+		  		<p>Абзац 3</p>
 			</template>
 			<template v-else-if="Math.random() > 0.5">
 				<big>Какой-то баг...</big>
@@ -437,7 +472,7 @@ Vue.component("tab-home", {
 	template: `
 		<div>
 			<label>Имя пользователя</label>
-		  	<custom-input v-model="userName" :placeholder="'Введите имя пользователя'" key="username-input"></custom-input>
+		  	<custom-input v-focus v-color-switch="'yellow'" v-model="userName" :placeholder="'Введите имя пользователя'" key="username-input"></custom-input>
 		</div>
 	`
 });
@@ -476,3 +511,29 @@ new Vue({
 	  }
 	}
 });
+
+var myMixin = {
+  created: function () {
+    this.hello();
+  },
+  methods: {
+    hello: function () {
+      console.log('примеси - это наследование не как у всех');
+    }
+  }
+};
+
+console.log(12345);
+
+var ComponentMixedHeader = Vue.extend({
+  mixins: [myMixin],
+  created: function () {
+    console.log('вызван хук компонента');
+  },
+  methods: {
+    hello: function () {
+      console.log('все нормально!');
+    }
+  }
+});
+new ComponentMixedHeader();
