@@ -37,6 +37,17 @@ const store = new Vuex.Store({
 			return state.todos.find(todo => todo.id === id);
 		}
 	}
+  },
+  actions: {
+    incrementAsync(context) {
+    	setTimeout(() => {
+    		context.commit('increment');
+    		context.commit('increment');
+    		context.commit('increment');
+    		context.commit('add', 1);
+    		console.log(context.state.count);
+    	});
+    }
   }
 });
 
@@ -333,6 +344,8 @@ Vue.component('app-content', {
 			this.increment();
 			this.increment();
 			console.log('increment = 3', this.$store.state.count);
+			this.$store.dispatch('incrementAsync');
+			this.incrementAsync();
 		},
 		testEventForParentComponent1(index, name) {
 			console.log(['testEventForParentComponent1', index, name]);
@@ -340,6 +353,9 @@ Vue.component('app-content', {
 		...Vuex.mapMutations([
 	      'increment',
 	    ]),
+	    ...Vuex.mapActions([
+	    	'incrementAsync'
+	    ])
 	},
 });
 
