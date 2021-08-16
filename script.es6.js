@@ -17,7 +17,7 @@ const store = new Vuex.Store({
 });
 
 Vue.component('anchored-heading', {
-  render: function (createElement) {
+  render(createElement) {
     return createElement(
       'h' + this.level,   // имя тега
       this.$slots.default // массив дочерних элементов
@@ -33,12 +33,12 @@ Vue.component('anchored-heading', {
 
 Vue.directive('focus', {
 	// Когда привязанный элемент вставлен в DOM...
-	inserted: function (el) {
+	inserted(el) {
 		// Переключаем фокус на элемент
 		console.log(el);
 		el.focus()
 	},
-	bind: function (el, binding, vnode) {
+	bind(el, binding, vnode) {
 	    console.log('focus directive bind', {
 	      'name'       : (binding.name),
 	      'value'      : (binding.value),
@@ -50,54 +50,54 @@ Vue.directive('focus', {
 	}
 });
 
-var MyPlugin = {};
-MyPlugin.install = function (Vue, options) {
+var MyPlugin = {
+	install(Vue, options) {
 
-	Vue.mixin({
-		created: function () {
-			var myOption = this.message;
-			if (myOption) {
-				console.log('наверное можно использовать для отладки', myOption);
+		Vue.mixin({
+			created() {
+				var myOption = this.message;
+				if (myOption) {
+					console.log('наверное можно использовать для отладки', myOption);
+				}
 			}
-		}
-	});
+		});
 
-	Vue.directive('focus', {
-		// Когда привязанный элемент вставлен в DOM...
-		inserted: function (el) {
-			// Переключаем фокус на элемент
-			console.log(el);
-			el.focus()
-		},
-		bind: function (el, binding, vnode) {
-		    console.log('focus directive bind', {
-		      'name'       : (binding.name),
-		      'value'      : (binding.value),
-		      'expression' : (binding.expression),
-		      'argument'   : (binding.arg),
-		      'modifiers: '  : (binding.modifiers),
-		      'vnode keys: ' : Object.keys(vnode).join(', ')
-		  });
-		}
-	});
+		Vue.directive('focus', {
+			// Когда привязанный элемент вставлен в DOM...
+			inserted(el) {
+				// Переключаем фокус на элемент
+				console.log(el);
+				el.focus()
+			},
+			bind(el, binding, vnode) {
+			    console.log('focus directive bind', {
+			      'name'       : (binding.name),
+			      'value'      : (binding.value),
+			      'expression' : (binding.expression),
+			      'argument'   : (binding.arg),
+			      'modifiers: '  : (binding.modifiers),
+			      'vnode keys: ' : Object.keys(vnode).join(', ')
+			  });
+			}
+		});
 
-	Vue.directive('color-switch', function (el, binding) {
-		el.style.backgroundColor = binding.value
-	});
+		Vue.directive('color-switch', function (el, binding) {
+			el.style.backgroundColor = binding.value
+		});
 
-	Vue.filter('capitalize', function (value) {
-	  if (!value) return ''
-	  value = value.toString()
-	  return value.charAt(0).toUpperCase() + value.slice(1)
-	});
+		Vue.filter('capitalize', function (value) {
+		  if (!value) return ''
+		  value = value.toString()
+		  return value.charAt(0).toUpperCase() + value.slice(1)
+		});
 
-	Vue.filter('uppercase', function (value, arg1) {
-		console.log('uppercase filter', arg1);
-	  if (!value) return ''
-	  value = value.toString()
-	  return value.toUpperCase()
-	});
-
+		Vue.filter('uppercase', function (value, arg1) {
+			console.log('uppercase filter', arg1);
+		  if (!value) return ''
+		  value = value.toString()
+		  return value.toUpperCase()
+		});
+	}
 };
 
 Vue.use(MyPlugin);
@@ -111,16 +111,16 @@ var LocalComponentMikrofrontend = {
 	props: [
 		'n',
 	],
-	data: function () {
+	data() {
 		return {
 
 		};
 	},
 	methods: {
-		alert: function (msg) {
+		alert(msg) {
 			alert(msg);
 		},
-		warn: function (message, event) {
+		warn(message, event) {
 		    if (event) {
 		    	event.preventDefault();
 		    	message += ' ' + event.target.textContent;
@@ -141,7 +141,7 @@ Vue.component('custom-input', {
 		'value',
 		'placeholder',
 	],
-	created: function () {
+	created() {
 	    setTimeout(() => {
 	    	this.$emit('input', 'привет от Скайнет');
 	    }, 10000);
@@ -170,16 +170,16 @@ Vue.component('app-nav', {
 		};
 	},
 	//!!! Не используйте стрелочные функции в свойствах экземпляра и в коллбэках, например created: () => console.log(this.a) или vm.$watch('a', newVal => this.myMethod())
-	created: function () {
+	created() {
 	    setTimeout(() => {
 	    	this.message = 'Видоизменённый заголовок...';
 	    }, 1000);
 	}/*,
-	mounted: function () {
+	mounted() {
 	},
-	updated: function () {
+	updated() {
 	},
-	destroyed: function () {
+	destroyed() {
 	}*/
 });
 
@@ -195,7 +195,7 @@ Vue.component('app-sidebar', {
 			message: 'Вы загрузили эту страницу: ' + new Date().toLocaleString()
 		};
 	},
-	created: function () {
+	created() {
 	    setTimeout(() => {
 	    	this.message = 'Видоизменённый title: ' + Math.ceil(Math.random() * 10 + 90);
 	    }, 2000);
@@ -223,7 +223,7 @@ Vue.component('todo-item', {
 		</li>
 	`,
 	methods: {
-		getTitle: function (code) {
+		getTitle(code) {
 			console.log('test inject', this.getMap());
 
 			switch (code) {
@@ -235,7 +235,7 @@ Vue.component('todo-item', {
 					return '';
 			}
 		},
-		test1: function (event) {
+		test1(event) {
 			console.log(event.target);
 		}
 	}
@@ -274,7 +274,7 @@ Vue.component('app-content', {
 			</footer>
 		</div>
 	`,
-	provide: function () {
+	provide() {
 		return {
 			getMap: this.getMap
 		}
@@ -289,7 +289,7 @@ Vue.component('app-content', {
 			]
 		};
 	},
-	created: function () {
+	created() {
 	    setTimeout(() => {
 	    	store.commit('increment');
 	    	this.todos.push({id: 3, text: 'Profit.'});
@@ -297,18 +297,18 @@ Vue.component('app-content', {
 	    }, 1500);
 	},
 	methods: {
-		getMap: function () {
+		getMap() {
 			return {
 				'this-is': 'map'
 			};
 		},
-		processTodos: function (event) {
+		processTodos(event) {
 			console.log('processTodos', event);
 			this.todos.sort((v) => Math.random() > 0.5);
 			this.$store.commit('increment');
 			console.log(this.$store.state.count);
 		},
-		testEventForParentComponent1: function (index, name) {
+		testEventForParentComponent1(index, name) {
 			console.log(['testEventForParentComponent1', index, name]);
 		},
 	},
@@ -363,26 +363,26 @@ Vue.component('app-view', {
 			message: 'Сейчас меня видно',
 		};
 	},
-	created: function () {
+	created() {
 	    setTimeout(() => {
 	    	this.seen = true;
 	    }, 2500);
 	},
 	computed: {
 		// геттер вычисляемого значения
-		reversedMessage: function () {
+		reversedMessage() {
 			// `this` указывает на экземпляр vm
 			return this.message.split('').reverse().join('');
 		}
 	},
 	methods: {
-		onClick: function (event) {
+		onClick(event) {
 			this.reverseMessage();
 			this.eventName = null;
 			this.someAttr = 'title';
 			console.log(event);
 		},
-		reverseMessage: function () {
+		reverseMessage() {
 			this.message = this.reversedMessage;
 		}
 	}
@@ -395,7 +395,7 @@ var app = new Vue({
 	},
 	store,
 	computed: {
-		classList: function () {
+		classList() {
 			return {
 				selected: true,
 				removed: true
@@ -418,18 +418,18 @@ var app5 = new Vue({
 	components: {
 		'component-mikrofrontend': LocalComponentMikrofrontend,
 	},
-	created: function () {
+	created() {
 	    setTimeout(() => {
 	    	this.showForm = true;
 	    }, 1500);
 	},
 	computed: {
 		// геттер вычисляемого значения
-		reversedMessage: function () {
+		reversedMessage() {
 			// `this` указывает на экземпляр vm
 			return this.message.split('').reverse().join('');
 		},
-		classList: function () {
+		classList() {
 			return {
 				active: this.isActive,
 				'text-danger': this.hasError()
@@ -437,23 +437,23 @@ var app5 = new Vue({
 		},
 	},
 	methods: {
-		reverseMessage: function () {
+		reverseMessage() {
 			this.message = this.reversedMessage;
 		},
-		hasError: function () {
+		hasError() {
 			var res = (Math.random() * 50);
 			console.log(res);
 			return res > 25;
 		},
-		onClick1: function (event) {
+		onClick1(event) {
 			console.log(event);
 			this.reverseMessage();
 			this.isActive = !this.isActive;
 		},
-		alert: function (msg) {
+		alert(msg) {
 			alert(msg);
 		},
-		warn: function (message, event) {
+		warn(message, event) {
 		    if (event) {
 		    	event.preventDefault();
 		    	message += ' ' + event.target.textContent;
@@ -485,37 +485,37 @@ var app6 = new Vue({
 	},
 	watch: {
 	    // эта функция запускается при любом изменении вопроса
-	    message: function (newValue, oldValue) {
+	    message(newValue, oldValue) {
 			console.log('ajax search: ', newValue, oldValue);
 	    },
-	    userName: function (newValue, oldValue) {
+	    userName(newValue, oldValue) {
 	    	console.log(newValue + ' -> ' + oldValue);
 	    },
 	},
 	computed: {
 		fullName: {
-			get: function () {
+			get() {
 				return this.firstName + ' ' + this.lastName;
 			},
-			set: function (newValue) {
+			set(newValue) {
 				var names = newValue.split(' ');
 				this.firstName = names[0];
 				this.lastName = names[names.length - 1];
 			}
 		},
-		styleList: function () {
+		styleList() {
 			return {
 				'font-size': '12px',
 				'color': 'orange',
 				'text-decoration': 'underline',
 			};
 		},
-		evenNumbers: function () {
+		evenNumbers() {
 			return this.numbers.filter((n) => n % 2 === 0);
 		},
 	},
 	methods: {
-		onClick: function (event) {
+		onClick(event) {
 			this.fullName = this.message;
 			this.activeColor = 'brown';
 			this.fontSize = 24;
@@ -523,7 +523,7 @@ var app6 = new Vue({
 			this.loginType = this.loginType == 'username'? '' : 'username';
 			console.log(event);
 		},
-		even: function (numbers) {
+		even(numbers) {
 			return numbers.filter((n) => n % 2 === 0);
 		},
 	}
@@ -537,7 +537,7 @@ setTimeout(() => {
 // dynamic component
 
 Vue.component("tab-home", {
-	data: function () {
+	data() {
 		return {
 			userName: 'user name 1',
 		};
@@ -581,18 +581,18 @@ new Vue({
 	  ]
 	},
 	computed: {
-	  currentTabComponent: function () {
+	  currentTabComponent() {
 	    return 'tab-' + this.currentTab.toLowerCase();
 	  }
 	}
 });
 
 var myMixin = {
-  created: function () {
+  created() {
     this.hello();
   },
   methods: {
-    hello: function () {
+    hello() {
       console.log('примеси - это наследование не как у всех');
     }
   }
@@ -602,11 +602,11 @@ console.log(12345);
 
 var ComponentMixedHeader = Vue.extend({
   mixins: [myMixin],
-  created: function () {
+  created() {
     console.log('вызван хук компонента');
   },
   methods: {
-    hello: function () {
+    hello() {
       console.log('все нормально!');
     }
   }
