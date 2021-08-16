@@ -1,6 +1,35 @@
 
 import Vue from 'https://cdn.jsdelivr.net/npm/vue@2/dist/vue.esm.browser.js';
+import 'https://unpkg.com/vuex';
 import { ComponentNotice } from './component.notice.js';
+
+Vue.use(Vuex);
+
+const store = new Vuex.Store({
+  state: {
+    count: 0
+  },
+  mutations: {
+    increment(state) {
+      state.count++
+    }
+  }
+});
+
+Vue.component('anchored-heading', {
+  render: function (createElement) {
+    return createElement(
+      'h' + this.level,   // имя тега
+      this.$slots.default // массив дочерних элементов
+    )
+  },
+  props: {
+    level: {
+      type: Number,
+      required: true
+    }
+  }
+});
 
 Vue.directive('focus', {
 	// Когда привязанный элемент вставлен в DOM...
@@ -223,7 +252,9 @@ Vue.component('app-content', {
 	},
 	created: function () {
 	    setTimeout(() => {
+	    	store.commit('increment');
 	    	this.todos.push({id: 3, text: 'Profit.'});
+	    	console.log('store: ', store.state.count);
 	    }, 1500);
 	},
 	methods: {
@@ -235,6 +266,8 @@ Vue.component('app-content', {
 		processTodos: function (event) {
 			console.log('processTodos', event);
 			this.todos.sort((v) => Math.random() > 0.5);
+			this.$store.commit('increment');
+			console.log(this.$store.state.count);
 		},
 		testEventForParentComponent1: function (index, name) {
 			console.log(['testEventForParentComponent1', index, name]);
@@ -321,6 +354,7 @@ var app = new Vue({
 	template: '#app-template',
 	data: {
 	},
+	store,
 	computed: {
 		classList: function () {
 			return {
@@ -489,7 +523,9 @@ Vue.component("tab-posts", {
 Vue.component("tab-archive", {
 	template: `
 		<div>
-			PHP, HTML, MYSQL
+			<anchored-heading :level="1">PHP</anchored-heading>
+			<anchored-heading :level="2">HTML</anchored-heading>
+			<anchored-heading :level="3">MYSQL</anchored-heading>
 		</div>
 	`
 });
