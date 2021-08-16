@@ -47,7 +47,14 @@ const store = new Vuex.Store({
     		context.commit('add', 1);
     		console.log(context.state.count);
     	});
-    }
+    },
+    async actionA ({ commit }) {
+	    commit('gotData', await getData())
+	  },
+	  async actionB ({ dispatch, commit }) {
+	    await dispatch('actionA') // дожидаемся завершения действия `actionA`
+	    commit('gotOtherData', await getOtherData())
+	  }
   }
 });
 
