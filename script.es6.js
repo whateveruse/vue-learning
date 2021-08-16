@@ -17,6 +17,12 @@ const store = new Vuex.Store({
   mutations: {
     increment(state) {
       state.count++
+    },
+    add(state, n) {
+      state.count += n;
+    },
+    addObj(state, obj) {
+      state.count += obj.amount;
     }
   },
   getters: {
@@ -25,6 +31,11 @@ const store = new Vuex.Store({
     },
     doneTodosCount(state, getters) {
 		return getters.doneTodos.length;
+	},
+	getTodoById(state) {
+		return (id) => {
+			return state.todos.find(todo => todo.id === id);
+		}
 	}
   }
 });
@@ -318,12 +329,17 @@ Vue.component('app-content', {
 		processTodos(event) {
 			console.log('processTodos', event);
 			this.todos.sort((v) => Math.random() > 0.5);
-			this.$store.commit('increment');
-			console.log(this.$store.state.count);
+			this.increment();
+			this.increment();
+			this.increment();
+			console.log('increment = 3', this.$store.state.count);
 		},
 		testEventForParentComponent1(index, name) {
 			console.log(['testEventForParentComponent1', index, name]);
 		},
+		...Vuex.mapMutations([
+	      'increment',
+	    ]),
 	},
 });
 
