@@ -50,18 +50,57 @@ Vue.directive('focus', {
 	}
 });
 
-Vue.directive('color-switch', function (el, binding) {
-	el.style.backgroundColor = binding.value
-})
+var MyPlugin = {};
+MyPlugin.install = function (Vue, options) {
 
-Vue.mixin({
-	created: function () {
-		var myOption = this.message;
-		if (myOption) {
-			console.log('наверное можно использовать для отладки', myOption);
+	Vue.mixin({
+		created: function () {
+			var myOption = this.message;
+			if (myOption) {
+				console.log('наверное можно использовать для отладки', myOption);
+			}
 		}
-	}
-})
+	});
+
+	Vue.directive('focus', {
+		// Когда привязанный элемент вставлен в DOM...
+		inserted: function (el) {
+			// Переключаем фокус на элемент
+			console.log(el);
+			el.focus()
+		},
+		bind: function (el, binding, vnode) {
+		    console.log('focus directive bind', {
+		      'name'       : (binding.name),
+		      'value'      : (binding.value),
+		      'expression' : (binding.expression),
+		      'argument'   : (binding.arg),
+		      'modifiers: '  : (binding.modifiers),
+		      'vnode keys: ' : Object.keys(vnode).join(', ')
+		  });
+		}
+	});
+
+	Vue.directive('color-switch', function (el, binding) {
+		el.style.backgroundColor = binding.value
+	});
+
+	Vue.filter('capitalize', function (value) {
+	  if (!value) return ''
+	  value = value.toString()
+	  return value.charAt(0).toUpperCase() + value.slice(1)
+	});
+
+	Vue.filter('uppercase', function (value, arg1) {
+		console.log('uppercase filter', arg1);
+	  if (!value) return ''
+	  value = value.toString()
+	  return value.toUpperCase()
+	});
+
+};
+
+Vue.use(MyPlugin);
 
 Vue.component(
 	'lazy-header',
@@ -120,7 +159,7 @@ Vue.component('app-nav', {
 	template: `
 		<div>
 			<slot :message="message">
-				<b>{{ message }}</b>
+				<b>{{ message | uppercase }}</b>
 			</slot>
 		</div>
 	`,
@@ -304,7 +343,7 @@ Vue.component('app-view', {
 			></component-notice>
 
 			<template v-if="seen" :[someAttr]="message" @[eventName]="onClick">
-				<p>{{ message }}</p>
+				<p>{{ message | capitalize }}</p>
 	  			<p>Абзац 2</p>
 		  		<p>Абзац 3</p>
 			</template>
