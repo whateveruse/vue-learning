@@ -7,12 +7,25 @@ Vue.use(Vuex);
 
 const store = new Vuex.Store({
   state: {
-    count: 0
+    count: 0,
+    todos: [
+		{ id: 0, text: 'Изучить JavaScript', done: false, },
+		{ id: 1, text: 'Изучить Vue', done: false, },
+		{ id: 2, text: 'Создать еще один JS фреймворк', done: true, }
+	]
   },
   mutations: {
     increment(state) {
       state.count++
     }
+  },
+  getters: {
+  	doneTodos(state) {
+      return state.todos.filter(todo => todo.done);
+    },
+    doneTodosCount(state, getters) {
+		return getters.doneTodos.length;
+	}
   }
 });
 
@@ -401,6 +414,9 @@ var app = new Vue({
 				removed: true
 			};
 		},
+		 doneTodosCount () {
+		    return this.$store.getters.doneTodosCount
+		  },
 		countLocal() {
 			return this.$store.state.count;
 		},
@@ -614,7 +630,10 @@ var ComponentMixedHeader = Vue.extend({
   methods: {
     hello() {
       console.log('все нормально!');
+
+	  console.log('this.$store.getters.doneTodosCount: ', this.$store.getters.doneTodosCount);
     }
-  }
+  },
+  store
 });
 new ComponentMixedHeader();
