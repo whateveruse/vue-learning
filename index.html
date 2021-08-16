@@ -46,6 +46,19 @@
 
 <script type="text/x-template" id="app-template">
 	<div>
+		<p>
+			<!-- используем компонент router-link для навигации -->
+			<!-- входной параметр `to` определяет URL для перехода -->
+			<!-- `<router-link>` по умолчанию отображается тегом `<a>` -->
+			<router-link to="/foo">Перейти к Foo</router-link>
+			<router-link to="/bar">Перейти к Bar</router-link>
+			<router-link to="/user/tester">Перейти к профилю Tester</router-link>
+			<router-link to="/user/user">Перейти к профилю User</router-link>
+			<router-link :to="{ name: 'user_post', params: { id: 'tester1', post_id: 201 }}">Перейти к сообщению пользователя Tester</router-link>
+		</p>
+		<!-- отображаем тут компонент, для которого совпадает маршрут -->
+		<router-view></router-view>
+
 		<h4>Count {{ count }} = {{ countLocal }} / {{ doneTodosCount }} </h4>
 		<app-nav :class="classList">
 			<template #default="slotProps">

@@ -1,9 +1,11 @@
 
 import Vue from 'https://cdn.jsdelivr.net/npm/vue@2/dist/vue.esm.browser.js';
 import 'https://unpkg.com/vuex';
+import 'https://unpkg.com/vue-router/dist/vue-router.js';
 import { ComponentNotice } from './component.notice.js';
 
 Vue.use(Vuex);
+Vue.use(VueRouter);
 
 const store = new Vuex.Store({
 	strict: true, // Не используйте строгий режим в production!
@@ -457,12 +459,114 @@ Vue.component('app-view', {
 	}
 });
 
+const Foo = { template: `
+	<lazy-header>
+		Route1
+	</lazy-header>
+` }
+const Bar = { template: `
+	<lazy-header>
+		Route2
+	</lazy-header>
+` }
+const User = { template: `
+		<lazy-header>
+			<h1>Это раздел пользователя [ {{ $route.params.id }} ]</h1>
+			<router-view></router-view>
+		</lazy-header>
+	`,
+
+	beforeRouteUpdate(to, from, next) {
+	    // обрабатываем изменение параметров маршрута...
+	    console.log(to, from);
+	    // не забываем вызвать next()
+	    next();
+	}
+}
+
+const UserProfile = { template: `
+	<lazy-header>
+		Это профиль пользователя [ {{ $route.params.id }} ]
+	</lazy-header>
+` }
+
+const UserPost = { template: `
+	<lazy-header>
+		Это сообщение [ {{ $route.params.post_id }} ] пользователя [ {{ $route.params.id }} ]
+	</lazy-header>
+` }
+
+const Page404NotFound = { template: `
+	<lazy-header>
+		<h1>404 Not found</h1>
+		<p>{{ $route.params }}</p>
+		<p>{{ $route.query }}</p>
+		<p>{{ $route.hash }}</p>
+	</lazy-header>
+` }
+
+const UserHome = { template: `
+	<pre>H O M E  P A G E</pre>
+` }
+
+
+const router = new VueRouter({
+	routes: [
+	  { path: '/foo', component: Foo },
+	  { path: '/bar', component: Bar },
+      { path: '/user/:id', component: User,
+      	 children: [
+	        {
+	          path: 'profile',
+	          component: UserProfile
+	        },
+	        {
+	        	name: 'user_post',
+	          path: 'post/:post_id',
+	          component: UserPost
+	        },
+	        {
+	        	path: '',
+	        	component: UserHome
+	        }
+	      ]
+  		},
+      //{ path: '/user/:username/post/:post_id', component: UserPost },
+
+      {
+      	// example /#/sadsadsdasd?test=1#sss
+
+		  // сопоставляется со всем
+		  path: '*', component: Page404NotFound
+		}
+	]
+})
+
 var app = new Vue({
+	router,
 	el: '#app',
 	template: '#app-template',
 	data: {
 	},
 	store,
+	created() {
+		this.$router.push('/user/tester');
+		setTimeout(() => {
+			this.$router.push('/user/tester/post/100');
+		}, 2000);
+		setTimeout(() => {
+			this.$router.push({
+				name: 'user_post',
+				params: {
+					id: 'tester5',
+					post_id: 1000,
+				}
+			});
+		}, 4000);
+		setTimeout(() => {
+			router.go(-1);
+		}, 5000);
+	},
 	computed: {
 		classList() {
 			return {
@@ -476,10 +580,19 @@ var app = new Vue({
 		countLocal() {
 			return this.$store.state.count;
 		},
+		username() {
+	      // Мы скоро разберём что такое `params`
+	      return this.$route.params.username
+	    },
 		...Vuex.mapState([
 		    'count',
 		])
 	},
+	methods: {
+		goBack() {
+     		window.history.length > 1 ? this.$router.go(-1) : this.$router.push('/')
+	    }
+	}
 });
 
 var app5 = new Vue({
