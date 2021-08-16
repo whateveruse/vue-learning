@@ -401,6 +401,12 @@ var app = new Vue({
 				removed: true
 			};
 		},
+		countLocal() {
+			return this.$store.state.count;
+		},
+		...Vuex.mapState([
+		    'count',
+		])
 	},
 });
 
