@@ -37,7 +37,6 @@ Extension::load('ui.vue3');
 
 <script type="module">
 
-	//const BitrixVue = BX.Vue3.BitrixVue;
 	const {
 		BitrixVue,
 		ref,
@@ -139,7 +138,10 @@ Extension::load('ui.vue3');
 <div id="application"></div>
 
 <script type="module">
-import {BitrixVue} from 'ui.vue3';
+
+const BitrixVue = BX.Vue3.BitrixVue;
+//import {BitrixVue} from 'ui.vue3';
+
 BitrixVue.createApp({
 	data()
 	{
@@ -158,6 +160,7 @@ BitrixVue.createApp({
 		Counter: {{ counter }}
 	`
 }).mount('#application');
+
 </script>
 
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>
